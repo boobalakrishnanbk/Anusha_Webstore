@@ -1,0 +1,112 @@
+{% extends 'Fixed/default_homepage.html' %}
+
+
+{% block body_block %}
+  <div class="d-flex justify-content-center">
+    <div class="row">
+      <div class="collapse" id="AddManager">
+        <div class="card jumbotron m-3">
+          <form class="" action="{% url 'Accounts:Add_Manager' %}" method="post">
+            {% csrf_token %}
+            <div class="row m-2">
+              <div class="col">
+                <label for="farmimgplace" class="">Farm Location</label>
+                <select class="form-control dropdown" name="farmlocation" id="farmlocation" required>
+                  <option value=""></option>
+                  {% for farm in farms %}
+                  <option value="{{ farm.farmingplace }}">{{ farm.farmingplace }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col">
+                <label for="email" class="">Email </label>
+                <input type="email" name="email" class="form-control" placeholder="Enter mail id" required>
+              </div>
+            </div>
+
+            <div class="row m-2">
+              <div class="col">
+                <label for="phone" class="">Phone </label>
+                <input type="text" name="phone" class="form-control " placeholder="Mobile" pattern="[0-9]{10}" required>
+              </div>
+              <div class="col">
+                <label for="locality" class="">Locality </label>
+                <input type="text" name="locality" placeholder="Locality" class="form-control  " required>
+              </div>
+            </div>
+
+            <div class="row m-2">
+              <div class="col">
+                <label for="username" class="">Username </label>
+                <input type="text" name="username" class="form-control " placeholder="Enter unique name" required>
+              </div>
+              <div class="col">
+                <label for="password" class="">Password </label>
+                <input type="password" name="password" class="form-control " required>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              {% if message != None %}
+              <p class="text-muted">Username already taken. Try another</p>
+              {% endif %}
+            </div>
+            <div class="d-flex justify-content-center">
+              <input type="submit" class="m-3 btn btn-outline-success" value="Add Manager">
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <div class="row">
+      <p>
+        <a class="text-success nav-link mr-3 mb-4" data-toggle="collapse" href="#AddManager" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Add Manager
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <!--  -->
+  <div class="d-flex justify-content-center form-inline">
+    <table class="table table-hover m-3">
+      <thead>
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">Username</th>
+          <th scope="col">Email ID</th>
+          <th scope="col">Locality</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Farming Location</th>
+          <th scope="col">Join  Date</th>
+          <th scope="col">Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for manager in managers %}
+        <tr>
+          <td class="">{{ forloop.counter }}</td>
+          <td class="">{{ manager.username }}</td>
+          <td class="">{{ manager.email }}</td>
+          <td class="">{{ manager.locality }}</td>
+          <td class="">{{ manager.phone }}</td>
+          <td>{{ manager.farming_location }}</td>
+          <td>{{ manager.join_date }}</td>
+          <td>
+            <form class="" action="{% url 'Accounts:Remove_Manager' %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="user_id" value="{{ manager.user_id }}">
+              <input type="submit" class="btn btn-danger mb-2" value="Remove">
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody
+    </table>
+  </div>
+{% endblock %}

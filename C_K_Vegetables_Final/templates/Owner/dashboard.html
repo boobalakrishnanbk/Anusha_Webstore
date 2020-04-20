@@ -1,0 +1,88 @@
+{% extends 'Fixed/default_homepage.html' %}
+
+{% block body_block %}
+<div class="jumbotron">
+  <div class="row">
+    <div class="col">
+      <h1>Welcome Back Owner,</h1>
+    </div>
+    <div class="col-2">
+      <h5>{{ date }}</h5>
+    </div>
+  </div>
+  <p class="lead">Here are the stuffs for you today.</p>
+  <div class="mt-5">
+    <div class="">
+      <h3>Attendance Today</h3>
+      <div class="row mt-4">
+        <div class="col">
+          <p class="text-danger h5">Designation</p>
+        </div>
+        <div class="col">
+          <p class="text-danger h5">Total Employees</p>
+        </div>
+        <div class="col">
+          <p class="text-danger h5">Present</p>
+        </div>
+        <div class="col">
+          <p class="text-danger h5">Absent</p>
+        </div>
+      </div>
+          {% for position in designation %}
+          <div class="row">
+            <div class="col">
+              <p>{{ position.designation }}</p>
+            </div>
+            <div class="col">
+              <p>{{ position.total_count }}</p>
+            </div>
+            <div class="col">
+              <p>{{ position.count }}</p>
+            </div>
+            <div class="col">
+              <p>{{ position.absent }}</p>
+            </div>
+          </div>
+          {% endfor %}
+      </div>
+    </div>
+
+
+  <div class="mt-5">
+    <h3>Salary</h3>
+    <div class="">
+      <div class="row mt-4">
+        <div class="col">
+          <p class="text-danger h5">Designation</p>
+        </div>
+        <div class="col">
+          <p class="text-danger h5">Today</p>
+        </div>
+        <div class="col">
+          <p class="text-danger h5">Current Week</p>
+        </div>
+        <div class="col">
+          <p class="text-danger h5">Current Month</p>
+        </div>
+      </div>
+        {% for position in designation %}
+          <div class="row pb-3">
+            <div class="col">
+              {{ position.designation }}
+            </div>
+            <div class="col">
+              {{ position.todaysalary }}
+            </div>
+            <div class="col">
+              {{ position.weeksalary}}
+            </div>
+            <div class="col">
+              {{ position.monthsalary }}
+            </div>
+          </div>
+        {% endfor %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}

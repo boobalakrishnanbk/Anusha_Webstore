@@ -1,0 +1,59 @@
+{% extends 'Fixed/default_homepage.html' %}
+{% load staticfiles %}
+{% block body_block %}
+
+<div class="mt-3 p-2">
+  <div class="d-flex justify-content-center">
+    <!-- {% if yesterday == 0 %}
+    {% endif %} -->
+    <input type="text" id="search" onkeyup="searchEmployee()" placeholder="Enter name to search" class=" form-control w-75" >
+  </div>
+
+  <div class="pt-3 pb-3">
+    {% for position in designation %}
+      <table class="table table-hover" id="employee_details">
+        <p class="text-center h4 m-3 mb-4 text-muted">{{ position.designation }}</p>
+      <thead>
+        <tr>
+          <th scope="col-1">S.No</th>
+          <th scope="col">Name</th>
+          <th scope="col">Mobile</th>
+          <th scope="col">Designgation</th>
+          <th scope="col">Locality</th>
+          <th scope="col">Join Date</th>
+          <th scope="col">Advance</th>
+          <th scope="col">Worked Days</th>
+          <th scope="col">Salary to Pay</th>
+          <th scope="col">Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for detail in employees %}
+            {% if position.designation == detail.designation %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ detail.name }}</td>
+              <td>{{ detail.phone }}</td>
+              <td>{{ detail.designation }}</td>
+              <td>{{ detail.locality }}</td>
+              <td>{{ detail.date_joined }}</td>
+              <td>{{ detail.advance }}</td>
+              <td>{{ detail.worked_days }}</td>
+              <td>{{ detail.salary }}</td>
+              <td>
+                <form class="" action="{% url 'Manager:employee_Remove' %}" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="id" value="{{ detail.id }}">
+                  <input type="submit" class="btn btn-danger" value="Remove">
+                </form>
+              </td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

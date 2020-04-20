@@ -1,0 +1,96 @@
+{% extends 'Fixed/default_homepage.html' %}
+
+{% load staticfiles %}
+{% block body_block %}
+
+<div class="m-3">
+  <div class="d-flex justify-content-center">
+    <!-- <div class="row"> -->
+      <div class="col text-center">
+        <p class="text-danger mt-1">Date : {{ date }}</p>
+      </div>
+      <div class="col text-center mr-5 pr-2">
+        {% if yesterday == 0 %}
+        <form class="" action="" method="post">
+          {% csrf_token %}
+          <p class="text-dark mr-5 pr-5">Forget to put Attendances Yesterday.<input type="submit" class="btn text-primary" name="yesterday" value="Click here"></p>
+        </form>
+        {% endif %}
+      </div>
+    <!-- </div> -->
+  </div>
+
+  <div class="d-flex justify-content-center mb-3">
+    <input type="text" id="search" onkeyup="searchEmployee_attendance()" placeholder="Enter name to search" class=" form-control w-75" >
+  </div>
+
+  <div class="">
+    <div class="d-flex justify-content-center">
+      <form class="w-75" action="" method="post">
+        {% csrf_token %}
+
+        {% for position in designation %}
+        <ul class="list-group list-group-flush d-flex justify-content-front card bg-info p-2 mb-2">
+          <li class="h4 text-white">{{ position.designation }}</li>
+        </ul>
+        {% for detail in employees %}
+          {% for location in locality %}
+          {% if location.locality == detail.locality %}
+          {% if position.designation == detail.designation %}
+          <ul class="list-group list-group-flush d-flex justify-content-front w-25 mt-4">
+            <li class=" h4 bg-secondary border-round text-white p-1 text-center">{{ location.locality   }}</li>
+          </ul>
+<!--  -->
+
+          <div class="card mb-5">
+            <table class="table table-hover" id="employee_details">
+              <thead>
+                <tr class="">
+                  <th scope="col">Name</th>
+                  <th scope="col">Worked Days</th>
+                  <th scope="col">Shift - 1</th>
+                  <th scope="col">Shift - 2</th>
+                  <th scope="col">Absent</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <!-- <td class="col">{{ forloop.counter }}</td> -->
+                  <td>{{ detail.name }}</td>
+                  <td>{{ detail.worked_days }}</td>
+                  <td>
+                    <input type="radio" name="shift{{ detail.id }}" class="shift1" value="1">Present
+                  </td>
+                  <td>
+                    <input type="radio" name="shift{{ detail.id }}" class="shift2" value="2">Present
+                  </td>
+                  <td>
+                    <input type="radio" name="shift{{ detail.id }}"  class="shift3" value="3">Absent
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          {% endif %}
+          {% endif %}
+          {% endfor %}
+        {% empty %}
+          <div class="">
+            <p>Attendances for today are submitted already.</p>
+          </div>
+        {% endfor %}
+
+        {% endfor %}
+
+
+        <div class="d-flex justify-content-center">
+          <input type="submit" value="Submit" class="btn btn-dark ">
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- <div class="container">
+    <h4 class="text-danger text-center m-5 p-5">Seems like you have completed attendance for Employees today.</h4>
+  </div> -->
+{% endblock %}

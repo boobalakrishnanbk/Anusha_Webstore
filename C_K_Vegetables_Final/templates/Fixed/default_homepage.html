@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <title>C K Vegetables</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="{% static 'script/script.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/login_styles.css' %}">
+  </head>
+
+  <body onload="activechanger()">
+    <input type="hidden" id="active" value="{{ active }}">
+
+    <nav class="navbar nav navbar-light bg-light ">
+      <a class="h4 pt-2 text-muted nav-link" href="">C K Vegetables</a>
+      <div class="">
+        <li>
+          <a class="text-danger nav-link mr-5 mr-md-0 d-flex flex-row-reverse" href="{% url 'Accounts:User_Logout' %}">Logout ( {{ request.user }} )</a>
+        </li>
+      </div>
+
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row p-2 ">
+
+        <div class="card p-2 bg-primary col-2">
+          <div class="nav flex-column text-center">
+            {% if request.user.is_superuser %}
+
+            <a class="btn btn-primary" href="{% url 'Owner:dashboard' %}" name="dashboard" >Dashboard</a>
+            <div class="dropdown">
+              <a class="btn btn-primary  dropdown-toggle" href="" name="employee" role="button" id="Employee" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Employee</a>
+              <div class="dropdown-menu" aria-labelledby="Employee">
+                <a class="dropdown-item" href="{% url 'Owner:employee_attendance' %}">Attendance</a>
+                <a class="dropdown-item" href="{% url 'Owner:employee_salary' %}">Salary</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <a class="btn btn-primary  dropdown-toggle" href="" name="settings" role="button" id="dropdownSettings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
+              <div class="dropdown-menu" aria-labelledby="dropdownSettings">
+                <a class="dropdown-item" href="{% url 'Owner:settings_manager' %}">Manager</a>
+                <a class="dropdown-item" href="{% url 'Owner:settings_salary' %}">Salary</a>
+                <a class="dropdown-item" href="{% url 'Owner:settings_options' %}">Options</a>
+              </div>
+            </div>
+            {% else %}
+              <a class="btn btn-primary" href="{% url 'Manager:home' %}" name="home" >Home</a>
+              <a class="btn btn-primary" href="{% url 'Manager:employee_Attendance' %}" name="attendance">Attendance</a>
+              <a class="btn btn-primary" href="{% url 'Manager:employee_Salary' %}" name="salary">Salary</a>
+
+              <div class="dropdown">
+                <a class="btn btn-primary  dropdown-toggle" href="" name="employeedetails" role="button" id="dropdownEmployee" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Employee</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownEmployee">
+                  <a class="dropdown-item" href="{% url 'Manager:employee_Details' %}">Details</a>
+                  <a class="dropdown-item" href="{% url 'Manager:employee_Add' %}">Add Employee</a>
+                </div>
+              </div>
+
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card">
+            {% block body_block %}
+            {% endblock %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+</html>

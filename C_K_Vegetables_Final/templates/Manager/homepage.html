@@ -1,0 +1,86 @@
+{% extends 'Fixed/default_homepage.html' %}
+{% block body_block %}
+<div class="container-fluid pt-2 pb-2">
+  <div class="">
+    <ul>
+      <li>Home</li>
+      <ol>
+        <li>Here default Details are stored</li>
+      </ol>
+      <li>Attendance</li>
+      <ol>
+        <li>Why we use the attendance? For Giving Salary</li>
+        <li>You can sort employees based on different categories like</li>
+        <ul>
+          <li>Farming Place</li>
+          <li>Designation</li>
+          <li>Gender</li>
+          <li>Locality</li>
+        </ul>
+        <li>You can give attendance for all at a time or one by one</li>
+        <li>Forget to give attendance for an employee, Don't worry <b>Unmarked Attendance</b> was always availabe on the screen</li>
+        <li>Attendance will be shift based</li>
+        <ul>
+          <li>Shift 1 ( 9.00 a.m to 5.30 p.m )</li>
+          <li>Shift 1 ( 7.30 a.m to 5.30 p.m )</li>
+        </ul>
+        <li>Don't forget, For an employee you choose either anyone shift or absent</li>
+        <li><b>Always put your employee attendance in the evening time </b></li>
+        <li>If an employee stopped from work, Never feel. In Employee Details you can easily remove him/her. </li>
+        <li>If he/she come back to work, Simplay make rejoin in Employee Details under Inactive filter</li>
+      </ol>
+      <li>Salary</li>
+      <ol>
+        <li>Ready to Give Salary </li>
+        <li>Salary will be available only if an employee has worked days after previous salary payment</li>
+        <li>Worked days was calculated by the attendance of employees</li>
+        <li>Want to give Advance to employees you can do it here.</li>
+        <li>Only if an employee has zero advance, then his salary will be fully provided. Otherwise salary reduced from the advance and the remaing is provided. </li>
+        <li>NOTE : If employee advance is greater than his salary his salary will be zero</li>
+      </ol>
+      <li>Employee Details</li>
+      <ol>
+        <li>Want to Employee details come here.</li>
+        <li>Employee basic details can be viewed here</li>
+        <ul>
+          <li>Name</li>
+          <li>Join Date</li>
+          <li>Phone</li>
+          <li>Locality</li>
+          <li>Designation</li>
+          <li>Farming Place</li>
+          <li>Advance</li>
+          <li>Total Worked Days</li>
+        </ul>
+      </ol>
+      <li>Add Employee</li>
+      <ol>
+        <li>Any Employee can be joined here</li>
+        <li>Employee should have basic details like</li>
+        <ul>
+          <li>Name</li>
+          <li>Gender</li>
+          <li>Phone</li>
+          <li>Aadhaar</li>
+          <li>Locality</li>
+          <li>Designation</li>
+          <ol>
+            <li>driver</li>
+            <ul>
+              <li>Driving liscence Id</li>
+            </ul>
+            <li>worker</li>
+          </ol>
+          <li>Farming Place</li>
+        </ul>
+        <li>You should initially provide salary for an employee while adding new employee. Later you can change salary for any Employee by selecting the name</li>
+
+      </ol>
+    </ul>
+
+  </div>
+</div>
+
+
+
+{% endblock %}

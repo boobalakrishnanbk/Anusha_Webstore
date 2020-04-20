@@ -1,0 +1,59 @@
+{% extends 'Fixed/default_homepage.html' %}
+
+
+{% block body_block %}
+
+<div class="mt-3 mb-3 p-2">
+
+  <form class="" action="" method="post">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-9 ml-5">
+        <input type="text" id="search" name="search" onkeyup="filterEmployee()" placeholder="Enter name to search" class=" form-control ml-5">
+      </div>
+      <div class="col ml-5">
+        <input type="submit" class="w-50 form-control btn btn-warning " value="Submit">
+      </div>
+    </div>
+  </form>
+  <!-- </div> -->
+  {% if employees != 0 %}
+  <div class="d-flex justify-content-center m-5">
+    <div class="w-75">
+      <div class="card p-2">
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Salary</th>
+              <th>Advance</th>
+              <th>Manager</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for employee in employees %}
+            <tr>
+              <td>{{ employee.name }}</td>
+              <td>{{ employee.date }}</td>
+              <td>{{ employee.salary }}</td>
+              <td>{{ employee.advance }}</td>
+              <td>{{ employee.manager }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+  {% endif %}
+
+
+</div>
+
+{% endblock %}

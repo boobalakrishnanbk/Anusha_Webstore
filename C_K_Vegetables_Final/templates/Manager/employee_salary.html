@@ -1,0 +1,88 @@
+{% extends 'Fixed/default_homepage.html' %}
+{% load staticfiles %}
+{% block body_block %}
+
+
+<div class="p-3">
+
+  <div class="d-flex justify-content-center m-3">
+    <input type="text" id="search" onkeyup="searchEmployee_attendance()" placeholder="Enter name to search" class=" form-control w-75" >
+  </div>
+
+<form class="" action="" method="post">
+  {% csrf_token %}
+
+  {% for position in designation %}
+  <ul class="list-group list-group-flush d-flex justify-content-front card bg-info p-2 mb-2">
+    <li class="h4 text-white">{{ position.designation }}</li>
+  </ul>
+  {% for detail in employees %}
+    {% for location in locality %}
+    {% if location.locality == detail.locality %}
+    {% if position.designation == detail.designation %}
+    <ul class="list-group list-group-flush d-flex justify-content-front w-25 mt-4">
+      <li class=" h4 bg-secondary border-round text-white p-1 text-center">{{ location.locality   }}</li>
+    </ul>
+    <div class="card mb-5">
+      <table class="table table-hover" id="employee_details">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Advance</th>
+            <th scope="col">Worked Days</th>
+            <th scope="col">Salary / Day</th>
+            <th scope="col">Amount to Pay</th>
+            <th scope="col">Pay Salary</th>
+            <th scope="col">Enter Amount</th>
+            <th scope="col">Provide Advance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><h6>{{ detail.name }}</h6></td>
+            <td class="text-info"><h5>{{ detail.advance }}</h5></td>
+            <td class="text-danger"><h5>{{ detail.worked_days }}</h5></td>
+            <td class="text-info"><h5>{{ detail.salary }}</h5></td>
+            <td class="text-success "><h5>{{ detail.payamount }}</h5></td>
+            <td>
+              <form class="" action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ detail.id }}">
+                <input type="hidden" name="pay" value="{{ detail.payamount }}">
+                <input type="hidden" name="advance" value="{{ detail.advance }}">
+                <input type="hidden" name="salary" value="{{ detail.salary }}">
+                <input type="submit" class="btn btn-outline-success" name="paysalary" value="Pay Salary">
+              </form>
+            </td>
+            <form class="" action="" method="post">
+              {% csrf_token %}
+              <td>
+                <input type="number" name="amount" placeholder="Amount" class="form-control mr-4" required>
+              </td>
+              <td>
+                <input type="hidden" name="id" value="{{ detail.id }}">
+                <input type="hidden" name="pay" value="{{ detail.payamount }}">
+                <input type="hidden" name="advance" value="{{ detail.advance }}">
+                <input type="hidden" name="salary" value="{{ detail.salary }}">
+
+                <input type="submit" class="btn btn-outline-warning" value="Give Debt" name="paydebt">
+              </td>
+            </form>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+  {% empty %}
+  <div class="container">
+    <h4 class="text-danger text-center m-5 p-5">You have completed salary payment for all Employees till today.</h4>
+  </div>
+  {% endfor %}
+
+  {% endfor %}
+</div>
+
+{% endblock %}

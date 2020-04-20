@@ -1,0 +1,57 @@
+{% extends 'Fixed/default_homepage.html' %}
+
+{% block body_block %}
+
+<div class="mt-2 container d-flex justify-content-center ">
+  <form class="w-75" action="" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <div class="row">
+        <div class="col">
+          <label for="name">Name </label>
+          <input type="text" name="name" placeholder="Name" class="form-control" required>
+        </div>
+        <div class="col ">
+          <label for="phone">Phone</label>
+          <input type="text" name="phone" placeholder="9876543210"  class="form-control" pattern="[0-9]{10}" required>
+        </div>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col">
+          <label for="designation">Designation</label>
+          <select class="form-control dropdown" name="designation" id="designation" required>
+            <option value=""></option>
+            <!-- <option value="worker">worker</option> -->
+            {% for position in designation %}
+            <option value="{{ position.location }}">{{ position.location }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="col">
+          <label for="locality">Locality</label>
+          <input type="text" name="locality" class="form-control" required>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-6">
+        <label for="salary">Salary </label>
+        <input type="number" name="salary" class="form-control" required>
+      </div>
+    </div>
+
+    <div class="row p-3 justify-content-center">
+      <input type="submit" value="Add Employee" class="btn btn-success">
+    </div>
+
+  </form>
+</div>
+
+
+{% endblock %}

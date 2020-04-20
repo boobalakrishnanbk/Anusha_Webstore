@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>C K Vegetables</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/login_styles.css' %}">
+    <script src="{% static 'script/script.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body class=" bg-light">
+    <div class="">
+      <div class="h1 text-center p-3" id="title">
+        C K Vegetables
+      </div>
+    </div>
+    <div class="container">
+      <div class="h4 text-primary text-center mt-md-5 pt-md-3" id="header">
+        Login
+      </div>
+      <div class="d-flex justify-content-center " width=50>
+        <form class="form" action="{% url 'Accounts:login_page' %}" method="post">
+          {% csrf_token %}
+          <div class="form-group ">
+            <label for="username">Username</label>
+            <input type="text" name="username" class="form-control border-round" value="">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control border-round" value="">
+          </div>
+          {% if message != None %}
+          <div class="form-group">
+            <p class="text-muted text-center"> OOPS! Something was Incorrect. </p>
+          </div>
+          {% endif %}
+          <div class="d-flex justify-content-center">
+            <input type="submit" name="" value="Login" class="form-control btn btn-outline-primary border-round btn-success text-white w-25">
+          </div>
+          <div class="text-muted pt-2">
+            NOTE :<ol>
+              <li>Don't share your password with anyone.</li>
+              <ul>
+                <li>Because they can have the access to do everything.</li>
+              </ul>
+              <li>Try not to forget your username and password</li>
+              <li>We'll never share any data to anyone</li>
+            </ol>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
